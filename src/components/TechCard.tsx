@@ -1,7 +1,7 @@
 import { Star, Plus, Check } from "lucide-react";
 import type { Techs } from "../types/type";
 
-const TechCard = ({ tech, toggleStack, addedItems }: { tech: Techs; toggleStack: (id: string) => void; addedItems: Record<string, boolean> }) => {
+const TechCard = ({ tech, addToStack, isAdded }: { tech: Techs; addToStack: (technology: Techs) => void; isAdded: boolean }) => {
   return (
     <div key={tech.id} className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md">
       <div>
@@ -32,8 +32,8 @@ const TechCard = ({ tech, toggleStack, addedItems }: { tech: Techs; toggleStack:
           </div>
         </div>
 
-        <button onClick={() => toggleStack(tech.id)} className={`w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium transition-colors ${addedItems[tech.id] ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100" : "bg-gray-900 text-white hover:bg-gray-800"}`}>
-          {addedItems[tech.id] ? (
+        <button disabled={isAdded} onClick={() => addToStack(tech)} className={`w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium transition-colors ${isAdded ? "bg-emerald-50 text-emerald-700 border border-emerald-200 cursor-not-allowed" : "bg-gray-900 text-white hover:bg-gray-800"}`}>
+          {isAdded ? (
             <>
               <Check className="h-4 w-4" /> Added to Stack
             </>

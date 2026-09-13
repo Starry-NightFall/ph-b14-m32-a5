@@ -1,29 +1,20 @@
-import { use, useState } from "react";
 import type { Techs } from "../types/type";
 import TechCard from "./TechCard";
 
 interface TechCardsProps {
-  technologiesPromise: Promise<Techs[]>;
+  technologies: Techs[];
+  selectedTechnologies: Techs[];
+  addToStack: (technology: Techs) => void;
 }
 
-export default function TechCards({ technologiesPromise }: TechCardsProps) {
-  const technologies: Techs[] = use(technologiesPromise);
-  const [addedItems, setAddedItems] = useState({});
-
-
-  const toggleStack = (id: string) => {
-    setAddedItems((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
-
+export default function TechCards({ technologies, selectedTechnologies, addToStack }: TechCardsProps) {
   return (
-    <section className="max-w-7xl md:col-span-4 mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {technologies.map((technology) => (
-          <TechCard key={technology.id} tech={technology} toggleStack={toggleStack} addedItems={addedItems} />
-        ))}
+    <section>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {technologies.map((technology) => {
+          const isAdded = selectedTechnologies.some((item) => item.id === technology.id);
+          return <TechCard key={technology.id} tech={technology} addToStack={addToStack} isAdded={isAdded} />;
+        })}
       </div>
     </section>
   );
