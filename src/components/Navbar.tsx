@@ -2,7 +2,7 @@ import Logo from "../assets/logo-text.png";
 
 const Navbar = () => {
   return (
-    <div className="navbar sticky top-0 bg-white shadow-sm">
+    <div className="navbar sticky top-0 z-20 bg-white shadow-sm">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -53,8 +53,8 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn rounded-full btn-outline text-black hover:text-white">Sign In</a>
-          <a className="btn rounded-full ml-2">Sign Up</a>
+          <a className="btn hidden sm:inline-flex rounded-full btn-outline text-black hover:text-white">Sign In</a>
+          <a className="btn brand-gradient text-white rounded-full ml-2">Sign Up</a>
         </div>
       </div>
     </div>
